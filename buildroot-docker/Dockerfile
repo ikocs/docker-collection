@@ -13,15 +13,3 @@ RUN locale-gen en_US.utf8
 
 ENV EXTERNAL_TREE=/root/buildroot-et
 WORKDIR $EXTERNAL_TREE
-COPY buildroot-external-tree.tar.gz /root/buildroot-external-tree.tar.gz
-RUN tar -xf ~/buildroot-external-tree.tar.gz -C ${EXTERNAL_TREE} --strip-components=1 &&\
-    rm ~/buildroot-external-tree.tar.gz
-
-# RUN cd ~ && git clone https://gitlab.com/buildroot.org/buildroot.git &&\
-#     cd buildroot &&\
-#     git checkout tags/2024.11 -b 2024.11.x
-
-RUN cd /root/buildroot/ && make "BR2_EXTERNAL=${EXTERNAL_TREE}" solovey_rpi4b_64_defconfig 
-#RUN make "O=${EXTERNAL_TREE}/output" solovey_rpi4b_64_defconfig
-RUN cd /root/buildroot/ && make -j$(nproc) sdk
-

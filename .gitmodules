@@ -1,3 +1,0 @@
-[submodule "buildroot-docker/buildroot-ET-solovey"]
-	path = buildroot-docker/buildroot-ET-solovey
-	url = ssh://git@gitlab.filial.local:2222/software-group/solovey/buildroot-external-tree-solovey.git
