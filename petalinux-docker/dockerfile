@@ -62,7 +62,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 USER $USERNAME
 
-# Copy SDK
+# Копирования SDK, который нужно сформировать внутри petalinux
 COPY sdk.sh /home/petalinux/sdk.sh
 RUN mkdir -p /home/petalinux/sdk && \
     cd /home/petalinux/ && \

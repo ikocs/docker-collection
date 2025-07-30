@@ -4,6 +4,7 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update -y && \
     apt-get install -y file bc build-essential wget rsync libssl-dev libncurses-dev gcc g++ cpio unzip bzip2 libgnutls28-dev make git locales 
 
+# TODO: Версия buildroot вхардкожена, лучше указать её в переменной
 RUN cd ~ && wget -nv https://buildroot.org/downloads/buildroot-2024.11.4.tar.gz 
 RUN mkdir ~/buildroot && ls -lah 
 RUN tar -xf ~/buildroot-2024.11.4.tar.gz -C ~/buildroot --strip-components=1 &&\

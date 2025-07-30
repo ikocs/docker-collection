@@ -7,6 +7,7 @@ RUN apt-get update -y && \
 RUN locale-gen en_US.utf8 
 RUN mkdir -p /root/br-sdk/sdk 
 
+# Необходимо сформировать SDK внутри buildroot, в котором собирается образ
 COPY aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz /root/br-sdk/aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz
 RUN cd /root/br-sdk &&\
     tar -xf ./aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz -C ./sdk --strip-components=1 &&\
