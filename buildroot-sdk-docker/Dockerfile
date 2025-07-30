@@ -11,7 +11,3 @@ COPY aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz /root/br-sdk/aarch64-build
 RUN cd /root/br-sdk &&\
     tar -xf ./aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz -C ./sdk --strip-components=1 &&\
     rm ./aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz
-
-COPY filial_root_ca.crt /usr/local/share/ca-certificates/
-RUN update-ca-certificates
-
