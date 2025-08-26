@@ -1,0 +1,29 @@
+default:
+  image: # PASTE YYOUR DOCKER IMAGE URL, FROM CONTAINER REGISTRY
+
+stages:
+  - build
+
+before_script:
+  - uname -a
+  - export EXTERNAL_TREE=$(pwd)  
+  - 'echo "Repository cloned to: ${EXTERNAL_TREE}"'
+
+build-project:
+  stage: build
+  when: manual
+  tags: 
+    - ubuntu
+  script:
+    - echo EXTERNAL_TREE=${EXTERNAL_TREE}
+    - 'echo Current directory: $(pwd)'
+    - 'mkdir ${EXTERNAL_TREE}/output && ls -lah ${EXTERNAL_TREE}/output'
+    # Приходится два раза вызвать make, потому что флаг BR2_EXTERNAL и флаг O одновременно не работают. 
+    # Вначале нужно проинциализировать файлы в /output, а потом там прикрепить external tree и запустить сборку
+    - 'cd /root/buildroot/ && make defconfig BR2_DEFCONFIG=${EXTERNAL_TREE}/configs/solovey_rpi4b_64_defconfig O=${EXTERNAL_TREE}/output'
+    - 'cd ${EXTERNAL_TREE}/output && make "BR2_EXTERNAL=${EXTERNAL_TREE}" solovey_rpi4b_64_defconfig && make'
+    - 'make sdk'
+  artifacts:
+    paths:
+      - ./output/images/aarch64-buildroot-linux-gnu_sdk-buildroot.tar.gz
+      - ./output/images/sdcard.img
